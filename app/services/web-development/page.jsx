@@ -93,6 +93,20 @@ const deliverables = [
   "Cloud deployment and CI/CD",
 ];
 
+
+const trustSignals = [
+  ["Fast experience", "Responsive layouts and performance-minded engineering."],
+  ["Clear process", "A structured path from idea to launch."],
+  ["Built to evolve", "Architecture that can grow with your product."],
+];
+
+const conversionStages = [
+  ["01", "Attract", "A clear value proposition that tells visitors what you do and why it matters."],
+  ["02", "Engage", "Interactive sections, useful proof and product visuals that keep attention moving."],
+  ["03", "Convert", "Focused calls-to-action and friction-aware forms that make the next step obvious."],
+  ["04", "Retain", "Fast, useful digital experiences that give customers a reason to come back."],
+];
+
 const faqs = [
   ["Do you build only company websites?", "No. Trionex India can build marketing websites, e-commerce platforms, dashboards, portals, SaaS products and custom business applications."],
   ["Can you build the backend too?", "Yes. Web projects can include APIs, authentication, databases, integrations, business logic and deployment."],
@@ -259,6 +273,17 @@ export default function WebDevelopmentPage() {
 
   return (
     <main ref={revealRef} className="min-h-screen overflow-hidden bg-white text-slate-950">
+      {/* MOBILE CONVERSION BAR */}
+      <div className="fixed inset-x-0 bottom-0 z-[60] border-t border-slate-200 bg-white/95 p-3 shadow-[0_-10px_35px_rgba(15,23,42,.10)] backdrop-blur-xl sm:hidden">
+        <div className="mx-auto flex max-w-md items-center gap-2">
+          <Link href="/work" className="flex-1 rounded-full border border-slate-200 py-3 text-center text-xs font-bold text-slate-700">
+            See Work
+          </Link>
+          <Link href="/contact" className="flex-1 rounded-full bg-slate-950 py-3 text-center text-xs font-bold text-white">
+            Start Project
+          </Link>
+        </div>
+      </div>
       {/* HERO */}
       <section className="relative overflow-hidden bg-[#f9faff]">
         <div className="absolute left-[-10%] top-20 h-[500px] w-[500px] rounded-full bg-indigo-100/40 blur-3xl" />
@@ -302,6 +327,21 @@ export default function WebDevelopmentPage() {
 
           <div className="web-reveal relative z-10">
             <ProductMockup tab={activeTab} />
+          </div>
+        </div>
+
+        {/* HERO TRUST STRIP */}
+        <div className="relative mx-auto max-w-7xl px-6 pb-10 lg:px-8 lg:pb-14">
+          <div className="grid overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-sm sm:grid-cols-3">
+            {trustSignals.map(([title, text], i) => (
+              <div key={title} className={`p-5 sm:p-6 ${i !== 0 ? "border-t border-slate-200 sm:border-l sm:border-t-0" : ""}`}>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 size={15} className="text-indigo-500" />
+                  <span className="text-xs font-bold text-slate-900">{title}</span>
+                </div>
+                <p className="mt-2 text-[11px] leading-5 text-slate-500">{text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -356,6 +396,43 @@ export default function WebDevelopmentPage() {
                   </div>
                   <h3 className="mt-8 text-base font-bold">{title}</h3>
                   <p className="mt-2 text-sm leading-6 text-slate-500">{text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      {/* CONVERSION EXPERIENCE */}
+      <section className="relative overflow-hidden bg-[#f8faff] py-24 lg:py-32">
+        <div className="absolute left-1/2 top-[-180px] h-[360px] w-[700px] -translate-x-1/2 rounded-full bg-indigo-100/40 blur-3xl" />
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl text-center web-reveal">
+            <p className="text-sm font-bold uppercase tracking-[.18em] text-indigo-600">Designed to move people</p>
+            <h2 className="mt-4 text-4xl font-extrabold leading-[1.04] tracking-[-.055em] sm:text-5xl">
+              A website should do more than look impressive.
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-slate-600">
+              It should help the right visitor understand your offer, trust
+              your business and confidently take the next step.
+            </p>
+          </div>
+
+          <div className="relative mt-16">
+            <div className="absolute left-[8%] right-[8%] top-10 hidden h-px bg-gradient-to-r from-transparent via-indigo-200 to-transparent lg:block" />
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              {conversionStages.map(([number, title, text], i) => (
+                <div key={number} className="group relative rounded-[26px] border border-slate-200 bg-white p-7 shadow-sm transition duration-500 hover:-translate-y-2 hover:border-indigo-200 hover:shadow-[0_25px_70px_rgba(79,70,229,.12)]">
+                  <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-950 text-lg font-extrabold text-white shadow-xl shadow-slate-200 transition group-hover:bg-indigo-600">
+                    {number}
+                  </div>
+                  <h3 className="mt-8 text-lg font-bold">{title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-500">{text}</p>
+                  <div className="mt-7 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.12em] text-indigo-500">
+                    {i === 0 ? "Attention" : i === 1 ? "Interest" : i === 2 ? "Action" : "Relationship"}
+                    <ArrowRight size={12} />
+                  </div>
                 </div>
               ))}
             </div>
@@ -458,6 +535,82 @@ export default function WebDevelopmentPage() {
                 <div className="mt-7 h-px w-10 bg-slate-200 transition-all duration-500 group-hover:w-20 group-hover:bg-indigo-500" />
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+
+      {/* EXPERIENCE AUDIT */}
+      <section className="mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-32">
+        <div className="grid gap-12 lg:grid-cols-[1fr_.9fr] lg:items-center">
+          <div className="web-reveal">
+            <p className="text-sm font-bold uppercase tracking-[.18em] text-indigo-600">Experience Audit</p>
+            <h2 className="mt-4 text-4xl font-extrabold tracking-[-.055em] sm:text-5xl">
+              Every important moment gets a job.
+            </h2>
+            <p className="mt-6 max-w-xl text-base leading-8 text-slate-600">
+              We look beyond individual sections and design the journey:
+              what someone sees first, what answers their questions, what
+              builds confidence and what makes contacting your business easy.
+            </p>
+            <div className="mt-8 space-y-3">
+              {[
+                ["First impression", "Positioning and visual hierarchy"],
+                ["Proof", "Services, work, capabilities and credibility"],
+                ["Decision", "Clear offer and focused calls-to-action"],
+                ["Action", "Simple contact, enquiry or purchase flow"],
+              ].map(([title, text]) => (
+                <div key={title} className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-4">
+                  <CheckCircle2 className="shrink-0 text-indigo-500" size={18} />
+                  <div>
+                    <p className="text-xs font-bold text-slate-900">{title}</p>
+                    <p className="mt-1 text-[11px] text-slate-500">{text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="web-reveal rounded-[30px] bg-slate-950 p-4 shadow-[0_30px_90px_rgba(15,23,42,.20)] sm:p-6">
+            <div className="rounded-[22px] border border-white/10 bg-white/[.04] p-5 sm:p-7">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-[9px] font-bold uppercase tracking-[.18em] text-indigo-300">Visitor journey</p>
+                  <p className="mt-2 text-sm font-bold text-white">From first click to enquiry</p>
+                </div>
+                <span className="rounded-full bg-emerald-400/10 px-3 py-1.5 text-[9px] font-bold text-emerald-300">Optimized flow</span>
+              </div>
+
+              <div className="mt-8 space-y-3">
+                {[
+                  ["01", "Hero", "What do you offer?"],
+                  ["02", "Proof", "Why should I trust you?"],
+                  ["03", "Offer", "Is this right for me?"],
+                  ["04", "CTA", "What should I do next?"],
+                ].map(([n, title, question], i) => (
+                  <div key={n} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[.04] p-4">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-500 text-[10px] font-bold text-white">{n}</span>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs font-bold text-white">{title}</p>
+                      <p className="mt-1 text-[9px] text-slate-500">{question}</p>
+                    </div>
+                    <div className="hidden h-1.5 w-16 overflow-hidden rounded-full bg-white/10 sm:block">
+                      <div className="h-full rounded-full bg-indigo-400" style={{ width: `${70 + i * 7}%` }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-5 rounded-2xl bg-white p-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-bold text-slate-800">Next action</span>
+                  <ArrowRight size={14} className="text-indigo-500" />
+                </div>
+                <div className="mt-3 h-10 rounded-xl bg-slate-950 px-4 py-3 text-[10px] font-bold text-white">
+                  Start a Project
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -612,6 +765,43 @@ export default function WebDevelopmentPage() {
               <p className="mt-3 pl-11 text-sm leading-6 text-slate-500">{text}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+
+      {/* WHAT YOU GET */}
+      <section className="border-y border-slate-200 bg-white py-24 lg:py-28">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-[.55fr_1.45fr] lg:items-center">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-[.18em] text-indigo-600">The result</p>
+              <h2 className="mt-4 text-4xl font-extrabold tracking-[-.055em] sm:text-5xl">
+                More than a website.
+              </h2>
+              <p className="mt-5 text-base leading-8 text-slate-600">
+                A connected digital experience your team can continue to use,
+                improve and build on.
+              </p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {[
+                ["A clear product story", "Visitors understand your offer faster."],
+                ["A stronger digital presence", "A visual system that feels consistent and intentional."],
+                ["A maintainable codebase", "Engineering decisions that remain understandable."],
+                ["A launch-ready foundation", "Testing, deployment and production considerations included."],
+              ].map(([title, text]) => (
+                <div key={title} className="flex gap-4 rounded-2xl border border-slate-200 bg-[#f8faff] p-5">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-500">
+                    <Check size={16} />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold">{title}</h3>
+                    <p className="mt-1 text-xs leading-5 text-slate-500">{text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

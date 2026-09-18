@@ -565,6 +565,90 @@ export default function MobileAppDevelopmentPage() {
         </div>
       </section>
 
+
+      {/* DEVICE ECOSYSTEM */}
+      <section className="bg-[#f8faff] py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center">
+            <div className="order-2 lg:order-1">
+              <div className="relative mx-auto max-w-md">
+                <div className="absolute -inset-10 rounded-full bg-indigo-100/40 blur-3xl" />
+                <div className="relative rounded-[38px] border-[10px] border-slate-950 bg-white p-2 shadow-[0_30px_90px_rgba(15,23,42,.18)]">
+                  <div className="overflow-hidden rounded-[27px] bg-[#f7f9fd]">
+                    <div className="mx-auto mt-2 h-5 w-24 rounded-full bg-slate-950" />
+                    <div className="p-5">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-[9px] font-bold uppercase tracking-[.16em] text-indigo-500">Today</p>
+                          <p className="mt-1 text-lg font-extrabold text-slate-950">Your activity</p>
+                        </div>
+                        <div className="h-8 w-8 rounded-full bg-indigo-100" />
+                      </div>
+                      <div className="mt-6 rounded-2xl bg-slate-950 p-5 text-white">
+                        <p className="text-[9px] text-slate-400">Weekly progress</p>
+                        <p className="mt-2 text-3xl font-extrabold">84%</p>
+                        <div className="mt-5 h-2 rounded-full bg-white/10">
+                          <div className="h-2 w-[84%] rounded-full bg-indigo-400" />
+                        </div>
+                      </div>
+                      <div className="mt-4 grid grid-cols-2 gap-3">
+                        {["Orders", "Messages", "Tasks", "Insights"].map((item) => (
+                          <div key={item} className="rounded-2xl border border-slate-200 bg-white p-4">
+                            <div className="h-7 w-7 rounded-lg bg-indigo-50" />
+                            <p className="mt-3 text-[10px] font-bold text-slate-800">{item}</p>
+                            <p className="mt-1 text-[8px] text-slate-400">View details</p>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="mt-4 h-10 rounded-xl bg-indigo-500 text-center text-[10px] font-bold leading-10 text-white">
+                        Continue
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="absolute -right-4 top-16 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-xl sm:-right-10">
+                  <p className="text-[8px] font-bold uppercase tracking-[.16em] text-indigo-500">App status</p>
+                  <div className="mt-2 flex items-center gap-2 text-[10px] font-bold text-slate-800">
+                    <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                    API Connected
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="order-1 lg:order-2">
+              <p className="text-sm font-bold uppercase tracking-[.18em] text-indigo-600">Device ecosystem</p>
+              <h2 className="mt-4 text-4xl font-extrabold tracking-[-.055em] sm:text-5xl">
+                Designed for the hand.
+                <span className="block text-slate-400">Engineered for the system.</span>
+              </h2>
+              <p className="mt-6 max-w-xl text-base leading-8 text-slate-600">
+                The app interface is only one layer. Behind every tap can be
+                authentication, APIs, notifications, databases, analytics and
+                cloud infrastructure.
+              </p>
+
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                {[
+                  ["iOS & Android", Smartphone],
+                  ["Push & Notifications", Zap],
+                  ["Secure APIs", ShieldCheck],
+                  ["Cloud Backend", Cloud],
+                ].map(([title, Icon]) => (
+                  <div key={title} className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-50 text-indigo-500">
+                      <Icon size={17} />
+                    </div>
+                    <span className="text-xs font-bold text-slate-700">{title}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ARCHITECTURE */}
       <section className="border-y border-slate-200 bg-slate-950 text-white">
         <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-32">
