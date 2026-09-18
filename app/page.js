@@ -2,12 +2,12 @@ import Hero from "@/components/Hero";
 import Stats from "@/components/Stats";
 import Services from "@/components/Services";
 import WhyTrionex from "@/components/WhyTrionex";
-// import DigitalSystem from "@/components/DigitalSystem";
-// import SelectedWork from "@/components/SelectedWork";
-// import Technology from "@/components/Technology";
-// import Process from "@/components/Process";
+import DigitalSystem from "@/components/DigitalSystem";
+import SelectedWork from "@/components/SelectedWork";
+ import Technology from "@/components/Technology";
+ import Process from "@/components/Process";
  import ClientExperience from "@/components/ClientExperience";
-// import FAQ from "@/components/FAQ";
+import FAQ from "@/components/FAQ";
  import FinalCTA from "@/components/FinalCTA";
 
 export default function Home() {
@@ -16,13 +16,13 @@ export default function Home() {
       <Hero />
       <Stats />
       <WhyTrionex />
-      {/* // <DigitalSystem /> */}
+      <DigitalSystem />
       <Services />
-      {/* // <SelectedWork />
-      // <Technology />
-      // <Process /> */}
+       <SelectedWork />
+       <Technology />
+       <Process /> 
       {<ClientExperience />}
-      {/* <FAQ /> */}
+      <FAQ />
 
       <FinalCTA /> 
     </main>

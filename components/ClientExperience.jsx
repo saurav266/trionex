@@ -1,247 +1,349 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
+import Link from "next/link";
 import {
   ArrowRight,
   Check,
-  CheckCircle2,
-  Handshake,
-  MessageSquare,
+  MessageCircle,
   ShieldCheck,
   Target,
+  Users,
+  Workflow,
+  Sparkles,
 } from "lucide-react";
-import Link from "next/link";
 
-const experienceItems = [
+const commitments = [
   {
-    icon: MessageSquare,
-    number: "01",
-    title: "Clear Communication",
-    text: "Know what is being built, why it matters and what comes next.",
-  },
-  {
-    icon: ShieldCheck,
-    number: "02",
-    title: "Transparent Process",
-    text: "Clear milestones, defined deliverables and visible project progress.",
+    icon: MessageCircle,
+    title: "Clear communication",
+    text: "You always know what is being worked on, what comes next and where decisions are needed.",
   },
   {
     icon: Target,
-    number: "03",
-    title: "Technical Ownership",
-    text: "We think through architecture, implementation and deployment as one connected responsibility.",
+    title: "Business-first thinking",
+    text: "Technology decisions are connected to your users, operations and business objectives.",
   },
   {
-    icon: Handshake,
-    number: "04",
-    title: "Long-Term Partnership",
-    text: "Launch is not the finish line. Your digital product can continue to evolve with your business.",
+    icon: ShieldCheck,
+    title: "Technical ownership",
+    text: "We take responsibility for the engineering details instead of leaving you to coordinate every layer.",
+  },
+  {
+    icon: Users,
+    title: "Long-term partnership",
+    text: "Launch is not the finish line. We can continue improving, scaling and automating the system with you.",
   },
 ];
 
-const commitments = [
-  "Understand the business problem",
-  "Define the right technical approach",
-  "Build with quality and clarity",
-  "Keep communication straightforward",
-  "Prepare the product for growth",
+const expectations = [
+  "A clear scope and delivery plan",
+  "Regular progress and practical updates",
+  "Accessible technical communication",
+  "Structured feedback and review points",
+  "Production-ready engineering practices",
+  "Support for the next stage of growth",
 ];
 
 export default function ClientExperience() {
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(".client-experience-reveal", {
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 78%",
-        },
-      });
+    const section = sectionRef.current;
+    if (!section) return;
 
-      gsap.to(".client-experience-orbit", {
-        rotate: 360,
-        duration: 30,
-        repeat: -1,
-        ease: "none",
-      });
-    }, sectionRef);
+    const items = section.querySelectorAll("[data-client-reveal]");
 
-    return () => ctx.revert();
+    items.forEach((item) => {
+      item.style.opacity = "1";
+      item.style.transform = "translateY(0)";
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("client-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.08 }
+    );
+
+    items.forEach((item) => observer.observe(item));
+
+    return () => observer.disconnect();
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-slate-50 px-6 py-24 lg:px-10 lg:py-32"
+      className="relative overflow-hidden bg-white px-6 py-28 text-slate-950 md:px-10 lg:px-16"
     >
-      {/* Background */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -right-40 top-20 h-96 w-96 rounded-full bg-indigo-200/25 blur-3xl" />
-        <div className="absolute -left-40 bottom-20 h-96 w-96 rounded-full bg-blue-100/30 blur-3xl" />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-50"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(148,163,184,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,0.08) 1px, transparent 1px)",
+          backgroundSize: "52px 52px",
+        }}
+      />
 
-        <div
-          className="absolute inset-0 opacity-[0.3]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(15,23,42,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.035) 1px, transparent 1px)",
-            backgroundSize: "48px 48px",
-          }}
-        />
-      </div>
+      <div className="pointer-events-none absolute right-[8%] top-20 h-80 w-80 rounded-full bg-indigo-100/70 blur-[110px]" />
+      <div className="pointer-events-none absolute bottom-0 left-[5%] h-72 w-72 rounded-full bg-blue-100/50 blur-[110px]" />
 
       <div className="relative mx-auto max-w-7xl">
         {/* Heading */}
-        <div className="client-experience-reveal max-w-4xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-indigo-600 shadow-sm">
-            <CheckCircle2 size={14} />
-            The Trionex India Experience
+        <div className="grid gap-10 lg:grid-cols-[1fr_0.8fr] lg:items-end">
+          <div data-client-reveal>
+            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-4 py-2 text-sm font-semibold text-indigo-600">
+              <Sparkles size={15} />
+              THE TRIONEX INDIA EXPERIENCE
+            </div>
+
+            <h2 className="mt-6 max-w-4xl text-5xl font-bold tracking-[-0.045em] md:text-6xl">
+              A better way to
+              <span className="block text-indigo-600">build together.</span>
+            </h2>
           </div>
 
-          <h2 className="text-4xl font-semibold leading-[1.06] tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
-            Great technology is only half the{" "}
-            <span className="text-indigo-600">partnership.</span>
-          </h2>
-
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-            Working with Trionex India should feel clear from the first
-            conversation to launch. We combine technical execution with a
-            structured, collaborative process.
+          <p
+            data-client-reveal
+            className="max-w-2xl text-lg leading-8 text-slate-600"
+          >
+            Great digital products need more than good code. They need a
+            reliable partnership, clear decisions and a team that understands
+            why the product exists.
           </p>
         </div>
 
-        {/* Main panel */}
-        <div className="client-experience-reveal mt-14 overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_25px_80px_rgba(15,23,42,0.07)]">
+        {/* Main experience panel */}
+        <div
+          data-client-reveal
+          className="mt-16 overflow-hidden rounded-[36px] border border-slate-200 bg-slate-950 shadow-[0_30px_90px_rgba(15,23,42,0.16)]"
+        >
           <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
-            {/* Visual side */}
-            <div className="relative min-h-[440px] overflow-hidden bg-slate-950 p-8 sm:p-12">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.22),transparent_60%)]" />
+            {/* Visual */}
+            <div className="relative min-h-[460px] overflow-hidden p-8 md:p-12">
+              <div
+                className="absolute inset-0 opacity-25"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(rgba(255,255,255,0.10) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px)",
+                  backgroundSize: "42px 42px",
+                }}
+              />
 
-              <div className="relative flex h-full min-h-[360px] items-center justify-center">
-                <div className="client-experience-orbit absolute h-[330px] w-[330px] rounded-full border border-white/10" />
-                <div className="absolute h-[250px] w-[250px] rounded-full border border-dashed border-indigo-300/20" />
-                <div className="absolute h-[170px] w-[170px] rounded-full border border-white/10" />
+              <div className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full border border-indigo-400/15" />
+              <div className="absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full border border-indigo-400/20" />
+              <div className="absolute left-1/2 top-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full border border-indigo-300/30 shadow-[0_0_80px_rgba(99,102,241,0.25)]" />
 
-                <div className="absolute left-[18%] top-[22%] h-2 w-2 rounded-full bg-indigo-300 shadow-[0_0_20px_rgba(165,180,252,0.9)]" />
-                <div className="absolute right-[18%] top-[42%] h-2 w-2 rounded-full bg-blue-300 shadow-[0_0_20px_rgba(147,197,253,0.8)]" />
-                <div className="absolute bottom-[22%] left-[32%] h-2 w-2 rounded-full bg-indigo-400 shadow-[0_0_20px_rgba(129,140,248,0.8)]" />
+              <div className="client-orbit absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-indigo-300/20" />
 
-                <div className="relative z-10 flex h-32 w-32 flex-col items-center justify-center rounded-full border border-indigo-300/30 bg-white/[0.06] text-center shadow-[0_0_80px_rgba(99,102,241,0.2)] backdrop-blur">
-                  <div className="text-xl font-bold tracking-tight text-white">
+              <div className="absolute left-1/2 top-1/2 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-indigo-300/40 bg-indigo-500/10 shadow-[0_0_80px_rgba(99,102,241,0.35)]">
+                <div className="text-center">
+                  <div className="text-xs font-bold tracking-[0.2em] text-indigo-300">
                     TRIONEX
                   </div>
-                  <div className="mt-1 text-[9px] font-bold uppercase tracking-[0.28em] text-indigo-300">
+                  <div className="mt-1 text-sm font-semibold text-white">
                     INDIA
                   </div>
-                  <div className="mt-3 text-[8px] uppercase tracking-[0.2em] text-slate-500">
-                    Client Partner
-                  </div>
-                </div>
-
-                <div className="absolute left-1/2 top-2 -translate-x-1/2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-300 backdrop-blur">
-                  Understand
-                </div>
-
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-300 backdrop-blur">
-                  Build
-                </div>
-
-                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-300 backdrop-blur">
-                  Grow
-                </div>
-
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-300 backdrop-blur">
-                  Support
                 </div>
               </div>
+
+              {[
+                ["01", "Strategy", "top-12 left-1/2 -translate-x-1/2"],
+                ["02", "Design", "right-5 top-1/2 -translate-y-1/2"],
+                ["03", "Engineering", "bottom-12 left-1/2 -translate-x-1/2"],
+                ["04", "Growth", "left-5 top-1/2 -translate-y-1/2"],
+              ].map(([number, title, position]) => (
+                <div
+                  key={number}
+                  className={`absolute ${position} rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-md`}
+                >
+                  <div className="text-[9px] font-bold tracking-[0.18em] text-indigo-300">
+                    {number}
+                  </div>
+                  <div className="mt-1 text-xs font-semibold text-slate-200">
+                    {title}
+                  </div>
+                </div>
+              ))}
             </div>
 
-            {/* Content side */}
-            <div className="p-8 sm:p-10 lg:p-14">
-              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-indigo-600">
-                What you can expect
-              </p>
+            {/* Copy */}
+            <div className="p-8 md:p-12">
+              <div className="flex items-center gap-3">
+                <Workflow size={20} className="text-indigo-400" />
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-300">
+                  One connected team
+                </span>
+              </div>
 
-              <h3 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
-                A partner that stays involved in the thinking.
+              <h3 className="mt-6 max-w-xl text-3xl font-bold tracking-tight text-white md:text-4xl">
+                You bring the vision.
+                <span className="text-indigo-300">
+                  {" "}
+                  We help turn it into a working system.
+                </span>
               </h3>
 
-              <p className="mt-5 leading-8 text-slate-600">
-                We believe a strong project is built through good decisions,
-                honest communication and consistent execution—not just lines
-                of code.
+              <p className="mt-6 max-w-xl leading-7 text-slate-400">
+                Instead of managing separate designers, developers and
+                infrastructure teams, you get a coordinated technology partner
+                across the product lifecycle.
               </p>
 
-              <div className="mt-8 space-y-4">
-                {commitments.map((item) => (
-                  <div key={item} className="flex items-start gap-3">
-                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-indigo-50 text-indigo-600">
-                      <Check size={14} />
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                {commitments.map((item) => {
+                  const Icon = item.icon;
+
+                  return (
+                    <div
+                      key={item.title}
+                      className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition-all duration-300 hover:border-indigo-400/30 hover:bg-white/[0.07]"
+                    >
+                      <Icon size={19} className="text-indigo-300" />
+                      <h4 className="mt-3 text-sm font-bold text-white">
+                        {item.title}
+                      </h4>
+                      <p className="mt-2 text-xs leading-5 text-slate-500">
+                        {item.text}
+                      </p>
                     </div>
-                    <span className="text-sm font-medium leading-6 text-slate-700">
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* What clients can expect */}
+        <div className="mt-10 grid gap-7 lg:grid-cols-[0.85fr_1.15fr]">
+          <div
+            data-client-reveal
+            className="rounded-[30px] border border-slate-200 bg-slate-50 p-8 md:p-10"
+          >
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-600 text-white shadow-lg shadow-indigo-200">
+              <Check size={23} strokeWidth={2.5} />
+            </div>
+
+            <h3 className="mt-7 text-3xl font-bold tracking-tight text-slate-950">
+              What you can expect.
+            </h3>
+
+            <p className="mt-4 leading-7 text-slate-600">
+              A practical working relationship where progress is visible and
+              important technical decisions are explained clearly.
+            </p>
+
+            <Link
+              href="/about"
+              className="group mt-7 inline-flex items-center gap-2 font-semibold text-slate-950 hover:text-indigo-600"
+            >
+              Learn about Trionex India
+              <ArrowRight
+                size={17}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
+            </Link>
+          </div>
+
+          <div
+            data-client-reveal
+            className="rounded-[30px] border border-slate-200 bg-white p-8 shadow-[0_15px_50px_rgba(15,23,42,0.06)] md:p-10"
+          >
+            <div className="grid gap-x-8 gap-y-5 sm:grid-cols-2">
+              {expectations.map((item, index) => (
+                <div
+                  key={item}
+                  className="flex items-start gap-3 border-b border-slate-100 pb-5 last:border-0 sm:nth-last-2:border-0"
+                >
+                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-indigo-50 text-indigo-600">
+                    <Check size={13} strokeWidth={3} />
+                  </span>
+                  <div>
+                    <span className="mr-2 text-xs font-bold text-slate-300">
+                      0{index + 1}
+                    </span>
+                    <span className="text-sm font-semibold text-slate-700">
                       {item}
                     </span>
                   </div>
-                ))}
-              </div>
-
-              <Link
-                href="/about"
-                className="mt-9 inline-flex items-center gap-2 font-semibold text-indigo-600 transition hover:gap-3"
-              >
-                Learn about Trionex India
-                <ArrowRight size={17} />
-              </Link>
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Experience cards */}
-        <div className="mt-6 grid gap-5 md:grid-cols-2">
-          {experienceItems.map((item) => {
-            const Icon = item.icon;
+        {/* CTA */}
+        <div
+          data-client-reveal
+          className="mt-10 flex flex-col items-start justify-between gap-6 border-t border-slate-200 pt-8 md:flex-row md:items-center"
+        >
+          <div>
+            <p className="text-sm font-semibold text-indigo-600">
+              Ready when you are.
+            </p>
+            <p className="mt-1 text-sm text-slate-500">
+              Tell us what you want to build and we will map the next steps.
+            </p>
+          </div>
 
-            return (
-              <article
-                key={item.number}
-                className="client-experience-reveal group rounded-3xl border border-slate-200 bg-white p-7 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-indigo-200 hover:shadow-xl sm:p-8"
-              >
-                <div className="flex items-start justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 transition duration-500 group-hover:bg-indigo-600 group-hover:text-white">
-                    <Icon size={21} />
-                  </div>
-
-                  <span className="text-sm font-bold text-slate-300">
-                    {item.number}
-                  </span>
-                </div>
-
-                <h3 className="mt-8 text-2xl font-semibold tracking-tight text-slate-950">
-                  {item.title}
-                </h3>
-
-                <p className="mt-3 leading-7 text-slate-600">
-                  {item.text}
-                </p>
-              </article>
-            );
-          })}
-        </div>
-
-        {/* Bottom statement */}
-        <div className="client-experience-reveal mt-10 rounded-3xl border border-indigo-100 bg-indigo-50/70 p-7 text-center sm:p-8">
-          <p className="text-xl font-semibold tracking-tight text-slate-950 sm:text-2xl">
-            Clear communication. Thoughtful engineering.{" "}
-            <span className="text-indigo-600">Better digital outcomes.</span>
-          </p>
+          <Link
+            href="/contact"
+            className="group inline-flex items-center gap-2 rounded-full bg-slate-950 px-6 py-3.5 font-semibold text-white transition-all duration-300 hover:bg-indigo-600"
+          >
+            Start a Conversation
+            <ArrowRight
+              size={18}
+              className="transition-transform duration-300 group-hover:translate-x-1"
+            />
+          </Link>
         </div>
       </div>
+
+      <style>{`
+        [data-client-reveal] {
+          opacity: 1 !important;
+          transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+          [data-client-reveal] {
+            transform: translateY(20px);
+            transition:
+              transform 700ms ease,
+              opacity 700ms ease;
+          }
+
+          [data-client-reveal].client-visible {
+            transform: translateY(0);
+          }
+
+          .client-orbit {
+            animation: clientOrbit 16s linear infinite;
+          }
+
+          @keyframes clientOrbit {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          [data-client-reveal] {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+          }
+
+          .client-orbit {
+            animation: none !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
